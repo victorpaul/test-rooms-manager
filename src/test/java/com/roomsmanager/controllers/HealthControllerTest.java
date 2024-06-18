@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,10 +16,10 @@ public class HealthControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getPing() {
+    public void pin_success() {
         final var r = restTemplate.exchange("/ping", HttpMethod.GET, null, String.class);
 
+        assertThat(r.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(r.getBody()).isEqualTo("pong");
     }
-
 }
