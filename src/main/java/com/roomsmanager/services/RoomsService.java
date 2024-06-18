@@ -1,12 +1,11 @@
 package com.roomsmanager.services;
 
 import com.roomsmanager.models.RoomsRevenue;
-import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface RoomsService {
 
-    Optional<RoomsRevenue> calculateRoomsRevenue(int freePremiumRooms, int freeEconomyRooms, float[] payments);
+    Optional<RoomsRevenue> calculateRoomsRevenue(int freePremiumRooms, int freeEconomyRooms, List<Double> payments);
 }
