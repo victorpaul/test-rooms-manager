@@ -1,14 +1,12 @@
 package com.roomsmanager.services;
 
 import com.roomsmanager.models.RoomsRevenue;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class RoomsServiceImpl implements RoomsService {
 
     // dummy hardcoded data

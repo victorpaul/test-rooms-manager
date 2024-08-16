@@ -1,8 +1,11 @@
 package com.roomsmanager.controllers;
 
 import com.roomsmanager.models.RoomsRevenue;
+import com.roomsmanager.services.FooBarService;
 import com.roomsmanager.services.RoomsService;
 import jakarta.validation.constraints.Min;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +18,12 @@ import static com.roomsmanager.services.RoomsServiceImpl.defaultUserPayments;
 @RequestMapping("/api/v1/rooms")
 public class RoomsController {
 
-    private final RoomsService roomsService;
+    @Autowired
+    private RoomsService roomsService;
+    @Qualifier("roomFooBarService")
+    @Autowired
+    private FooBarService fooBarService;
 
-    public RoomsController(RoomsService roomsService) {
-        this.roomsService = roomsService;
-    }
 
     @GetMapping("/occupied-revenue")
     public ResponseEntity<RoomsRevenue> calculateRevenue(
@@ -30,5 +34,10 @@ public class RoomsController {
 
         return resp.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().body(null));
 
+    }
+
+    @GetMapping("/info")
+    public String configInfo() {
+        return fooBarService.getAnswer();
     }
 }

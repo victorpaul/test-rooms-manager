@@ -1,9 +1,9 @@
 package com.roomsmanager.services;
 
+import com.roomsmanager.VisitCounter;
 import com.roomsmanager.models.RoomsRevenue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class RoomsServiceTest {
 
-    @Qualifier("roomsServiceImpl")
     @Autowired
     RoomsService roomsService;
 

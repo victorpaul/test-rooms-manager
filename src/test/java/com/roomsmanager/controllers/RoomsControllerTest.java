@@ -14,13 +14,15 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
-import java.util.Optional;
+import java.util.*;
 
 import static com.roomsmanager.services.RoomsServiceImpl.defaultUserPayments;
+import static java.util.stream.Collectors.groupingBy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@ContextConfiguration(classes = {TestHealthConfiguration.class})
 public class RoomsControllerTest {
 
     @MockBean
@@ -123,5 +125,20 @@ public class RoomsControllerTest {
                 r.getBody(),
                 false);
     }
+
+
+    @Test
+    public void testTest(){
+        final List<String> users = new ArrayList<String>(List.of("Bob","Jack","Bob"));
+        final var r = users
+                .stream()
+                .collect(groupingBy(s -> s));
+
+        final var nonUniq = r.values().stream().filter((v)-> v.size() > 1).flatMap(Collection::stream).toList();
+
+        assertThat(new HashSet<>(nonUniq)).isEqualTo(Set.of("Bob"));
+
+    }
+
 
 }
